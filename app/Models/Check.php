@@ -12,6 +12,7 @@ class Check extends Model
     protected $primaryKey = 'id';
     
     protected $fillable = [
+        'endpoint_id',
         'status_code',
         'response_body'
     ];

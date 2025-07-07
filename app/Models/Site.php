@@ -12,6 +12,7 @@ class Site extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
+        'user_id',
         'url'
     ];
 

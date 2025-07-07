@@ -12,6 +12,7 @@ class Endpoint extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
+        'site_id',
         'endpoint',
         'frequency',
         'next_check'
