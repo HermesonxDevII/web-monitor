@@ -10,16 +10,11 @@ use App\Http\Requests\{ StoreSiteRequest, UpdateSiteRequest };
 
 class SiteController extends Controller
 {
-
-    public function create(Request $request)
-    {
-        return view('admin/sites/create');
-    }
-
     public function index(Request $request)
     {
         try {
-            $sites = Site::all();
+            
+            $sites = Site::paginate();
 
             return view('admin/sites/index', compact('sites'));
             
@@ -28,6 +23,11 @@ class SiteController extends Controller
                 ->back()
                 ->withErrors(['exception' => $e->getMessage()]);
         }
+    }
+
+    public function create(Request $request)
+    {
+        return view('admin/sites/create');
     }
 
     public function store(StoreSiteRequest $request)

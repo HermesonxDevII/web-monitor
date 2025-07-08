@@ -2,7 +2,8 @@
 
 namespace App\Models;
 use Illuminate\Database\Eloquent\Relations\{ HasMany, BelongsTo };
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\{ Model, Builder };
+use Illuminate\Support\Facades\Auth;
 use App\Models\{ User, Endpoint };
 
 class Site extends Model
@@ -15,6 +16,13 @@ class Site extends Model
         'user_id',
         'url'
     ];
+
+    protected static function booted()
+    {
+        static::addGlobalScope('user', function (Builder $builder) {
+            $builder->where('user_id', Auth::user()->id);
+        });
+    }
 
     public $timestamps = true;
 
