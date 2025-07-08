@@ -18,7 +18,26 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::prefix('/admin')->group(function () {
-        Route::get('/sites', [SiteController::class, 'index'])->name('sites.index');
+        Route::prefix('/form')->group(function () {
+            Route::get('/site', [SiteController::class, 'create'])->name('sites.create');
+        });
+
+        Route::prefix('/create')->group(function () {
+            Route::post('/site', [SiteController::class, 'store'])->name('sites.store');
+        });
+
+
+        Route::prefix('/list')->group(function () {
+            Route::get('/sites', [SiteController::class, 'index'])->name('sites.index');
+        });
+
+        Route::prefix('/update')->group(function () {
+
+        });
+
+        Route::prefix('/delete')->group(function () {
+
+        });
     });
 });
 
