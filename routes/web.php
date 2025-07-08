@@ -19,7 +19,8 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('/admin')->group(function () {
         Route::prefix('/form')->group(function () {
-            Route::get('/site', [SiteController::class, 'create'])->name('sites.create');
+            Route::get('/site/create', [SiteController::class, 'create'])->name('sites.create');
+            Route::get('/site/edit/{id}', [SiteController::class, 'edit'])->name('sites.edit');
         });
 
         Route::prefix('/create')->group(function () {
@@ -32,11 +33,11 @@ Route::middleware('auth')->group(function () {
         });
 
         Route::prefix('/update')->group(function () {
-
+            Route::put('/site/{id}', [SiteController::class, 'update'])->name('sites.update');
         });
 
         Route::prefix('/delete')->group(function () {
-
+            Route::delete('/site/{id}', [SiteController::class, 'destroy'])->name('sites.destroy');
         });
     });
 });
