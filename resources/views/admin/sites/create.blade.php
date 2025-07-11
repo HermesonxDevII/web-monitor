@@ -13,17 +13,21 @@
                     <form
                         action="{{ route('sites.store') }}"
                         method="post"
-                        class="flex gap-1"
                     >
                         @include('admin/sites/partials/form')
-                    </form>
+                        
+                        <div class="flex flex-row gap-2 items-center mt-1">
+                            <button
+                                type="submit"
+                                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full h-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mt-2"
+                            > Enviar </button>
 
-                    <div class="flex flex-row gap-2">
-                        <a
-                            href="{{ route('sites.index') }}"
-                            class="focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mt-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-900"
-                        > Voltar </a>
-                    </div>
+                            <a
+                                href="{{ route('sites.index') }}"
+                                class="focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mt-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-900"
+                            > Voltar </a>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

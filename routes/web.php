@@ -22,13 +22,13 @@ Route::middleware('auth')->group(function () {
             Route::get('/site/create', [SiteController::class, 'create'])->name('sites.create');
             Route::get('/site/edit/{id}', [SiteController::class, 'edit'])->name('sites.edit');
             
-            Route::get('/endpoint/create', [EndpointController::class, 'create'])->name('endpoints.create');
-            Route::get('/endpoint/edit/{id}', [EndpointController::class, 'edit'])->name('endpoints.edit');
+            Route::get('/endpoint/create/{siteID}', [EndpointController::class, 'create'])->name('endpoints.create');
+            Route::get('/endpoint/edit/{siteID}/{id}', [EndpointController::class, 'edit'])->name('endpoints.edit');
         });
 
         Route::prefix('/create')->group(function () {
             Route::post('/site', [SiteController::class, 'store'])->name('sites.store');
-            Route::post('/endpoint', [EndpointController::class, 'store'])->name('endpoints.store');
+            Route::post('/endpoint/{siteID}', [EndpointController::class, 'store'])->name('endpoints.store');
         });
 
 
@@ -39,7 +39,7 @@ Route::middleware('auth')->group(function () {
 
         Route::prefix('/update')->group(function () {
             Route::put('/site/{id}', [SiteController::class, 'update'])->name('sites.update');
-            Route::put('/endpoint/{id}', [EndpointController::class, 'update'])->name('endpoints.update');
+            Route::put('/endpoint/{siteID}/{id}', [EndpointController::class, 'update'])->name('endpoints.update');
         });
 
         Route::prefix('/delete')->group(function () {

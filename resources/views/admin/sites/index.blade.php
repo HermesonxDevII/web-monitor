@@ -39,6 +39,20 @@
                                             href="{{ route('endpoints.index', $site->id) }}"
                                             class="font-semibold text-gray-800 dark:text-gray-200 leading-tight border rounded p-1 hover:bg-white hover:text-black transition duration-300"
                                         > Endpoints </a>
+
+                                        <form
+                                            action="{{ route('sites.destroy', $site->id) }}"
+                                            method="post"
+                                            class="flex flex-row gap-2"
+                                        >
+                                            @method('DELETE')
+                                            @csrf()
+
+                                            <button
+                                                type="submit"
+                                                class="font-semibold text-gray-800 dark:text-gray-200 leading-tight border rounded p-1 hover:bg-white hover:text-black transition duration-300"
+                                            > Deletar </button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach

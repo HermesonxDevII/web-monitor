@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\{ Schema, DB };
 
 return new class extends Migration
 {
@@ -20,7 +20,7 @@ return new class extends Migration
 
             $table->string('endpoint');
             $table->unsignedInteger('frequency');
-            $table->timestamp('next_check');
+            $table->timestamp('next_check')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamps();
         });
     }
