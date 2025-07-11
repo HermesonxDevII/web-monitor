@@ -44,7 +44,7 @@ Route::middleware('auth')->group(function () {
 
         Route::prefix('/delete')->group(function () {
             Route::delete('/site/{id}', [SiteController::class, 'destroy'])->name('sites.destroy');
-            Route::delete('/endpoint/{id}', [EndpointController::class, 'destroy'])->name('endpoints.destroy');
+            Route::delete('/endpoint/{sideID}/{id}', [EndpointController::class, 'destroy'])->name('endpoints.destroy');
         });
     });
 });

@@ -45,8 +45,13 @@
                                             class="font-semibold text-gray-800 dark:text-gray-200 leading-tight border rounded p-1 hover:bg-white hover:text-black transition duration-300"
                                         > Editar </a> 
 
+                                        <a
+                                            href="{{ route('endpoints.edit', [$site->id, $endpoint->id]) }}"
+                                            class="font-semibold text-gray-800 dark:text-gray-200 leading-tight border rounded p-1 hover:bg-white hover:text-black transition duration-300"
+                                        > Logs </a> 
+
                                         <form
-                                            action="{{ route('endpoints.destroy', $endpoint->id) }}"
+                                            action="{{ route('endpoints.destroy', [$site->id, $endpoint->id]) }}"
                                             method="post"
                                             class="flex flex-row gap-2"
                                         >

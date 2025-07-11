@@ -60,4 +60,15 @@ class EndpointController extends Controller
             ->route('endpoints.index', $site->id)
             ->with(['message' => 'Endpoint atualizado com sucesso!']);
     }
+
+    public function destroy(Request $request, int $siteID, int $id)
+    {
+        $site = findSite($siteID);
+        $endpoint = findEndpoint($id);
+        $endpoint->delete();
+
+        return redirect()
+            ->route('endpoints.index', $site->id)
+            ->with(['message' => 'Endpoint deletado com sucesso!']);
+    }
 }
