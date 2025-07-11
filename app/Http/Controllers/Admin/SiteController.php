@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\{ Validator, Auth, Log };
+use Illuminate\Support\Facades\{ Log };
 use App\Models\Site;
 use App\Http\Requests\{ StoreSiteRequest, UpdateSiteRequest };
 
@@ -33,7 +33,7 @@ class SiteController extends Controller
     public function store(StoreSiteRequest $request)
     {
         try {
-            $user = Auth::user();
+            $user = loggedUser();
             
             Site::create([
                 'user_id' => $user->id,
@@ -56,7 +56,7 @@ class SiteController extends Controller
     {
         try {
 
-            $site = $this->findSite($id);
+            $site = findSite($id);
 
             return view('admin/sites/edit', compact('site'));
 
@@ -71,7 +71,7 @@ class SiteController extends Controller
     {
         try {
 
-            $site = $this->findSite($id);
+            $site = findSite($id);
             $site->url = $request->url;
             $site->save();
 
@@ -91,7 +91,7 @@ class SiteController extends Controller
     {
         try {
 
-            $site = $this->findSite($id);
+            $site = findSite($id);
             $site->delete();
 
             return redirect()
@@ -104,10 +104,5 @@ class SiteController extends Controller
                 ->withErrors(['exception' => $e->getMessage()])
                 ->withInput();
         }
-    }
-
-    private function findSite(int $id): Site
-    {
-        return Site::findOrFail($id);
     }
 }
