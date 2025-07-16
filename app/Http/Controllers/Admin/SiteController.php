@@ -12,17 +12,9 @@ class SiteController extends Controller
 {
     public function index(Request $request)
     {
-        try {
-            
-            $sites = Site::paginate();
+        $sites = Site::paginate();
 
-            return view('admin/sites/index', compact('sites'));
-            
-        } catch (\Exception $e) {
-            return redirect()
-                ->back()
-                ->withErrors(['exception' => $e->getMessage()]);
-        }
+        return view('admin/sites/index', compact('sites'));
     }
 
     public function create(Request $request)
@@ -32,77 +24,39 @@ class SiteController extends Controller
 
     public function store(StoreSiteRequest $request)
     {
-        try {
-            $user = loggedUser();
+        $user = loggedUser();
             
-            Site::create([
-                'user_id' => $user->id,
-                'url'     => $request->url
-            ]);
+        Site::create([
+            'user_id' => $user->id,
+            'url'     => $request->url
+        ]);
 
-            return redirect()
-                ->route('sites.index')
-                ->with(['message' => 'Site criado com sucesso!']);
-
-        } catch (\Exception $e) {
-            return redirect()
-                ->back()
-                ->withErrors(['exception' => $e->getMessage()])
-                ->withInput();
-        }
+        return redirect()
+            ->route('sites.index')
+            ->with(['message' => 'Site criado com sucesso!']);
     }
 
-    public function edit(Request $request, int $id)
+    public function edit(Request $request, Site $site)
     {
-        try {
-
-            $site = findSite($id);
-
-            return view('admin/sites/edit', compact('site'));
-
-        } catch (\Exception $e) {
-            return redirect()
-                ->back()
-                ->withErrors(['exception' => $e->getMessage()]);
-        }
+        return view('admin/sites/edit', compact('site'));
     }
 
-    public function update(UpdateSiteRequest $request, int $id)
+    public function update(UpdateSiteRequest $request, Site $site)
     {
-        try {
+        $site->url = $request->url;
+        $site->save();
 
-            $site = findSite($id);
-            $site->url = $request->url;
-            $site->save();
-
-            return redirect()
-                ->route('sites.index')
-                ->with(['message' => 'Site editado com sucesso!']);
-
-        } catch (\Exception $e) {
-            return redirect()
-                ->back()
-                ->withErrors(['exception' => $e->getMessage()])
-                ->withInput();
-        }
+        return redirect()
+            ->route('sites.index')
+            ->with(['message' => 'Site editado com sucesso!']);
     }
 
-    public function destroy(Request $request, int $id)
+    public function destroy(Request $request, Site $site)
     {
-        try {
+        $site->delete();
 
-            $site = findSite($id);
-            $site->delete();
-
-            return redirect()
-                ->route('sites.index')
-                ->with(['message' => 'Site deletado com sucesso!']);
-
-        } catch (\Exception $e) {
-            return redirect()
-                ->back()
-                ->withErrors(['exception' => $e->getMessage()])
-                ->withInput();
-        }
+        return redirect()
+            ->route('sites.index')
+            ->with(['message' => 'Site deletado com sucesso!']);
     }
 }
