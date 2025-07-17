@@ -23,11 +23,7 @@ class EndpointController extends Controller
 
     public function store(StoreEndpointRequest $request, Site $site)
     {
-        Endpoint::create([
-            'site_id'    => $site->id,
-            'endpoint'   => $request->endpoint,
-            'frequency'  => $request->frequency,
-        ]);
+        $site->endpoints()->create($request->validated());
 
         return redirect()
             ->route('endpoints.index', $site->id)
@@ -41,9 +37,7 @@ class EndpointController extends Controller
 
     public function update(UpdateEndpointRequest $request, Site $site, Endpoint $endpoint)
     {   
-        $endpoint->endpoint = $request->endpoint;
-        $endpoint->frequency = $request->frequency;
-        $endpoint->save();
+        $endpoint->update($request->validated());
 
         return redirect()
             ->route('endpoints.index', $site->id)

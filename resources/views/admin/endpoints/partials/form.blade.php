@@ -14,7 +14,7 @@
     </div>
 
     <div>
-        <label for="frequency" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Frequência</label>
+        <label for="frequency" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Frequência (Min)</label>
         <input
             type="text"
             name="frequency"

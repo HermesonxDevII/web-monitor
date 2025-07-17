@@ -24,12 +24,7 @@ class SiteController extends Controller
 
     public function store(StoreSiteRequest $request)
     {
-        $user = loggedUser();
-            
-        Site::create([
-            'user_id' => $user->id,
-            'url'     => $request->url
-        ]);
+        $user = loggedUser()->sites()->create($request->validated());
 
         return redirect()
             ->route('sites.index')
@@ -43,8 +38,7 @@ class SiteController extends Controller
 
     public function update(UpdateSiteRequest $request, Site $site)
     {
-        $site->url = $request->url;
-        $site->save();
+        $site->update($request->validated());
 
         return redirect()
             ->route('sites.index')

@@ -22,11 +22,16 @@ class Endpoint extends Model
 
     public function site(): BelongsTo
     {
-        return $this->belongTo(Site::class);
+        return $this->belongsTo(Site::class);
     }
 
     public function checks(): HasMany
     {
         return $this->hasMany(Check::Class);
+    }
+
+    public function url(): string
+    {
+        return $this->site->url . $this->endpoint;
     }
 }

@@ -27,7 +27,7 @@
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
                                 <th scope="col" class="p-6">Endpoint</th>
-                                <th scope="col" class="p-6">Frequência</th>
+                                <th scope="col" class="p-6">Frequência (Min)</th>
                                 <th scope="col" class="p-6">Próxima Verificação</th>
                                 <th scope="col" class="p-6">Ações</th>
                             </tr>
