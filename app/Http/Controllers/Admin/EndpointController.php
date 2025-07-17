@@ -11,7 +11,7 @@ class EndpointController extends Controller
 {
     public function index(Request $request, Site $site)
     {
-        $endpoints = $site->endpoints;
+        $endpoints = $site->endpoints()->paginate();
 
         return view('admin/endpoints/index', compact('site', 'endpoints'));
     }

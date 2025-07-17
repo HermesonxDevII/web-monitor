@@ -46,7 +46,7 @@
                                         > Editar </a> 
 
                                         <a
-                                            href="{{ route('endpoints.edit', [$site->id, $endpoint->id]) }}"
+                                            href="{{ route('checks.index', [$site->id, $endpoint->id]) }}"
                                             class="font-semibold text-gray-800 dark:text-gray-200 leading-tight border rounded p-1 hover:bg-white hover:text-black transition duration-300"
                                         > Logs </a> 
 
@@ -68,6 +68,10 @@
                             @endforeach
                         </tbody>
                     </table>
+
+                    <div class="p-6">
+                        {{ $endpoints->links() }}
+                    </div>
                 </div>
             </div>
         </div>
