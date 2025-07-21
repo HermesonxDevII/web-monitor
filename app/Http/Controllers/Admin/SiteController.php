@@ -14,12 +14,12 @@ class SiteController extends Controller
     {
         $sites = Site::paginate();
 
-        return view('admin/sites/index', compact('sites'));
+        return view('admin.sites.index', compact('sites'));
     }
 
     public function create(Request $request)
     {
-        return view('admin/sites/create');
+        return view('admin.sites.create');
     }
 
     public function store(StoreSiteRequest $request)
@@ -33,11 +33,15 @@ class SiteController extends Controller
 
     public function edit(Request $request, Site $site)
     {
-        return view('admin/sites/edit', compact('site'));
+        $this->authorize('owner', $site);
+
+        return view('admin.sites.edit', compact('site'));
     }
 
     public function update(UpdateSiteRequest $request, Site $site)
     {
+        $this->authorize('owner', $site);
+
         $site->update($request->validated());
 
         return redirect()
@@ -47,6 +51,8 @@ class SiteController extends Controller
 
     public function destroy(Request $request, Site $site)
     {
+        $this->authorize('owner', $site);
+        
         $site->delete();
 
         return redirect()

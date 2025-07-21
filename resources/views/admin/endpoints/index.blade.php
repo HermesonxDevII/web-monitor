@@ -28,6 +28,7 @@
                             <tr>
                                 <th scope="col" class="p-6">Endpoint</th>
                                 <th scope="col" class="p-6">Frequência (Min)</th>
+                                <th scope="col" class="p-6">Último Status</th>
                                 <th scope="col" class="p-6">Próxima Verificação</th>
                                 <th scope="col" class="p-6">Ações</th>
                             </tr>
@@ -38,6 +39,7 @@
                                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                     <td class="px-6 py-4"> {{ $endpoint->endpoint }} </td>
                                     <td class="px-6 py-4"> {{ $endpoint->frequency }} </td>
+                                    <td class="px-6 py-4"> {{ $endpoint->check->status_code }} </td>
                                     <td class="px-6 py-4"> {{ $endpoint->next_check }} </td>
                                     <td class="px-6 py-4 flex flex-row gap-2">
                                         <a

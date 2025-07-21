@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Relations\{ HasMany, BelongsTo };
+use Illuminate\Database\Eloquent\Relations\{ HasMany, HasOne, BelongsTo };
 use Illuminate\Database\Eloquent\Model;
 use App\Models\{ Site, Check };
 class Endpoint extends Model
@@ -28,6 +28,11 @@ class Endpoint extends Model
     public function checks(): HasMany
     {
         return $this->hasMany(Check::Class);
+    }
+
+    public function check(): HasOne
+    {
+        return $this->hasOne(Check::Class)->latest();
     }
 
     public function url(): string

@@ -10,19 +10,25 @@ use App\Http\Requests\{ StoreEndpointRequest, UpdateEndpointRequest };
 class EndpointController extends Controller
 {
     public function index(Request $request, Site $site)
-    {
+    {   
+        $this->authorize('owner', $site);
+        
         $endpoints = $site->endpoints()->paginate();
-
-        return view('admin/endpoints/index', compact('site', 'endpoints'));
+        
+        return view('admin.endpoints.index', compact('site', 'endpoints'));
     }
 
     public function create(Request $request, Site $site)
     {
-        return view('admin/endpoints/create', compact('site'));
+        $this->authorize('owner', $site);
+
+        return view('admin.endpoints.create', compact('site'));
     }
 
     public function store(StoreEndpointRequest $request, Site $site)
     {
+        $this->authorize('owner', $site);
+
         $site->endpoints()->create($request->validated());
 
         return redirect()
@@ -32,11 +38,15 @@ class EndpointController extends Controller
 
     public function edit(Request $request, Site $site, Endpoint $endpoint)
     {   
-        return view('admin/endpoints/edit', compact('site', 'endpoint'));
+        $this->authorize('owner', $site);
+
+        return view('admin.endpoints.edit', compact('site', 'endpoint'));
     }
 
     public function update(UpdateEndpointRequest $request, Site $site, Endpoint $endpoint)
     {   
+        $this->authorize('owner', $site);
+
         $endpoint->update($request->validated());
 
         return redirect()
@@ -46,6 +56,8 @@ class EndpointController extends Controller
 
     public function destroy(Request $request, Site $site, Endpoint $endpoint)
     {
+        $this->authorize('owner', $site);
+        
         $endpoint->delete();
 
         return redirect()

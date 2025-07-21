@@ -10,8 +10,10 @@ class CheckController extends Controller
 {
     public function index(Request $request, Site $site, Endpoint $endpoint)
     {
+        $this->authorize('owner', $site);
+        
         $checks = $endpoint->checks()->paginate();
 
-        return view('admin/checks/index', compact('site', 'endpoint', 'checks'));
+        return view('admin.checks.index', compact('site', 'endpoint', 'checks'));
     }
 }
